@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Rubyblog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body>
+    
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+  
+    <%= link_to 'Все статьи', posts_path %>
+    |
+    <%= link_to 'Новая статья', new_post_path %>
+    |
+    
+    <% if user_signed_in? %>
+    <%= link_to 'Выход', destroy_user_session_path, data: {
+      turbo_method: :delete,
+      turbo_confirm: "Вы серьёзно хотите выйти?"
+    } %>
+    <% else %>
+    <%= link_to 'Вход', new_user_session_path %>
+    |
+    <%= link_to 'Регистрация', new_user_registration_path %>
+    <% end %>
+
+    <%= yield %>
+  </body>
+</html>
